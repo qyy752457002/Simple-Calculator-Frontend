@@ -5,7 +5,7 @@ export const queryClient = new QueryClient();
 
 export default async function fetchProblem ({signal}) {
 
-    const response = await fetch('http://localhost:3000/get-problem', {signal});
+    const response = await fetch('https://simple-calculator-backend.onrender.com/get-problem', {signal});
 
     if (!response.ok) {
         throw new Error('Network response was not ok')
