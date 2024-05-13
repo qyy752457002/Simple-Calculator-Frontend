@@ -13,7 +13,7 @@ function UserInput() {
   const { data, refetch, isSuccess } = useQuery({
     queryKey: ["math_question"], // 查询键
     queryFn: ({ signal }) => fetchProblem({ signal }), // 查询函数
-    staleTime: 10000, // 设置缓存时间
+    staleTime: Infinity
     onSuccess: () => {
       // 成功回调
       setProblemData({ problem: data.problem, answer: data.answer }); // 设置问题数据
