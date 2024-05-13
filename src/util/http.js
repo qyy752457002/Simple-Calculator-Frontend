@@ -5,7 +5,10 @@ export const queryClient = new QueryClient();
 
 export default async function fetchProblem ({signal}) {
 
-    const response = await fetch('https://simple-calculator-backend.onrender.com/get-problem', {signal});
+    // 获取环境变量中的主机
+    const host = import.meta.env.HOST;
+
+    const response = await fetch(`${host}/get-problem`, {signal});
 
     if (!response.ok) {
         throw new Error('Network response was not ok')
