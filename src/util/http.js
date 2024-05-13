@@ -6,7 +6,7 @@ export const queryClient = new QueryClient();
 export default async function fetchProblem ({signal}) {
 
     // 获取环境变量中的主机
-    const host = import.meta.env.HOST;
+    const host = import.meta.env.VITE_HOST;
 
     const response = await fetch(`${host}/get-problem`, {signal});
 
