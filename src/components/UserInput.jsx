@@ -37,7 +37,7 @@ function UserInput() {
     if (+userAnswer === +problemData.answer && N > 0) {
       // 判断用户答案是否正确
       setN(N - 1); // 减少问题数量
-      refetch(); // 获取新的问题
+      await refetch(); // 获取新的问题
     } else {
       alert("Wrong answer! Try Again!");
     }
