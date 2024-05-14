@@ -14,7 +14,7 @@ function UserInput() {
     queryKey: ["math_question"], // 查询键
     queryFn: ({ signal }) => fetchProblem({ signal }), // 查询函数
     staleTime: Infinity
-    onSuccess: () => {
+    onSuccess: (data) => {
       // 成功回调
       setProblemData({ problem: data.problem, answer: data.answer }); // 设置问题数据
       setStartTime(new Date()); // 设置开始时间
