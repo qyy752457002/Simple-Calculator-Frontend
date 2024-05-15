@@ -6,22 +6,24 @@ import { useCalculator } from "../store/CalculatorContext";
 function UserInput() {
   const [userAnswer, setUserAnswer] = useState(""); // 初始化 用户答案
   const [startTime, setStartTime] = useState(null); // 初始化 用户开始时间
-  const { times, setTimes, N, setN, problemData, setProblemData } =
-    useCalculator();
+  const { times, setTimes, N, setN, problemData, setProblemData } = useCalculator();
 
   const queryClient = useQueryClient(); // 获取 QueryClient 实例
 
   // 使用 useQuery hook 获取事件数据
-  const { data, refetch } = useQuery({
+  const { data, refetch, isSuccess } = useQuery({
     queryKey: ["math_question"], // 查询键
     queryFn: ({ signal }) => fetchProblem({ signal }), // 查询函数
     staleTime: Infinity, // 数据永远不会被标记查询陈旧，客户端不会向服务器请求最新的数据
-    onSuccess: () => {
-      // 成功回调
+  });
+
+  // 初始化 问题数据
+  useEffect(() => {
+    if (isSuccess && data) {
       setProblemData({ problem: data.problem, answer: data.answer }); // 设置问题数据
       setStartTime(new Date()); // 设置开始时间
-    },
-  });
+    }
+  }, [data, isSuccess, setProblemData]); // 当 data 或 isSuccess 发生变化时执行
 
   // 处理用户提交数据
   const handleSubmit = async () => {
@@ -64,3 +66,4 @@ function UserInput() {
 }
 
 export default UserInput;
+
